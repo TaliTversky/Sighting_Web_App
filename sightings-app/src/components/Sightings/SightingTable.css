@@ -1,0 +1,7 @@
+.table-fixed td, .table-fixed th {
+    width: 300px; /* Set a fixed width for each cell */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  

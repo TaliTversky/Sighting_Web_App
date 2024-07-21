@@ -1,0 +1,17 @@
+{
+  "resourceName": "SightingPhotosStorage",
+  "policyUUID": "c6f4fe21",
+  "bucketName": "sightingsphotosstorage",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "groupAccess": {}
+}

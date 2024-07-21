@@ -3,7 +3,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function SiteNav() {
+function SiteNav(props) {
+    const handleLogout = () => {
+      props.logOut()
+    }
     return (
         <header>
         <Navbar expand="lg" className="bg-body-tertiary">
@@ -15,7 +18,7 @@ function SiteNav() {
             <Nav.Link href="*">Home</Nav.Link>
             <Nav.Link href="/allSightings">All Sightings</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+              <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
