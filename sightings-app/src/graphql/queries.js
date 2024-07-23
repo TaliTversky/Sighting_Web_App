@@ -9,13 +9,6 @@ export const getSighting = /* GraphQL */ `
       time
       speciesCommonName
       speciesScienceName
-      site
-      latitude
-      longitude
-      count
-      stage
-      sex
-      condition
       createdAt
       updatedAt
       __typename
@@ -35,13 +28,6 @@ export const listSightings = /* GraphQL */ `
         time
         speciesCommonName
         speciesScienceName
-        site
-        latitude
-        longitude
-        count
-        stage
-        sex
-        condition
         createdAt
         updatedAt
         __typename

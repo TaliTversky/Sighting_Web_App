@@ -9,13 +9,6 @@ export const onCreateSighting = /* GraphQL */ `
       time
       speciesCommonName
       speciesScienceName
-      site
-      latitude
-      longitude
-      count
-      stage
-      sex
-      condition
       createdAt
       updatedAt
       __typename
@@ -30,13 +23,6 @@ export const onUpdateSighting = /* GraphQL */ `
       time
       speciesCommonName
       speciesScienceName
-      site
-      latitude
-      longitude
-      count
-      stage
-      sex
-      condition
       createdAt
       updatedAt
       __typename
@@ -51,13 +37,6 @@ export const onDeleteSighting = /* GraphQL */ `
       time
       speciesCommonName
       speciesScienceName
-      site
-      latitude
-      longitude
-      count
-      stage
-      sex
-      condition
       createdAt
       updatedAt
       __typename

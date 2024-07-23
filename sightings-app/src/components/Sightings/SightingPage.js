@@ -1,6 +1,6 @@
 import Container from "react-bootstrap/esm/Container";
 import SightingTable from "./SightingTable";
-import SightingForm from "./SightingForm2";
+import SightingsUpdate from "./SightingForm";
 // import SightingCreateForm from "../../ui-components/SightingCreateForm";
 
 function SightingPage() {
@@ -8,7 +8,7 @@ function SightingPage() {
         <Container>
             <h1>All Sightings</h1>
             <SightingTable />
-            <SightingForm />
+            <SightingsUpdate />
         </Container>
 
     )

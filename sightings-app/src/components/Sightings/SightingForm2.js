@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react';
 
 import { generateClient } from '@aws-amplify/api';
 import { getUrl, uploadData } from 'aws-amplify/storage';
-//C:\Users\ttversky\pet-app\meco-app\src\graphql\queries.js
 import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
 
 import { Amplify } from 'aws-amplify';
-import config from '../../amplifyconfiguration.json';
+import config from '../../amplifyconfiguration';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -18,8 +17,6 @@ import Button from 'react-bootstrap/Button';
 
 import {v4 as uuid} from 'uuid';
 import { getCurrentUser } from 'aws-amplify/auth';
-import awsExports from '../../aws-exports';
-Amplify.configure(config);
 
 const client = generateClient();
 
@@ -55,7 +52,7 @@ function SightingForm() {
 
     const getsightings = async() => {
         try {
-            const sightingsData = await client.graphql({query: queries.listSightings, authMode: "API_KEY" });
+            const sightingsData = await client.graphql({query: queries.listSightings, authMode:'iam'});
             console.log(sightingsData);
 
             const sightingsList = sightingsData.data.listSightings.items;
@@ -95,7 +92,7 @@ function SightingForm() {
                 condition
             } = formData;
             const { username, userId } = await getCurrentUser()
-            // console.log('>>>>> Here we got the form data', username, Pic, formData)
+            console.log('>>>>> Here we got the form data ', username, userId, Pic, formData)
         
 
             // Upload pic to S3
@@ -119,7 +116,7 @@ function SightingForm() {
             };
 
             // Persist new Contact
-            await client.graphql({query: mutations.createSighting, authMode: "userPool", variables: {input: newsighting}});
+            await client.graphql({query: mutations.createSighting, variables: {input: newsighting}, authMode: 'userPool'});
         } catch(err) {
             console.log('error', err);
         }

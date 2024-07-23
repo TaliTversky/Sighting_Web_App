@@ -1,25 +1,25 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-sightingsapp-dev-47900-authRole",
-      "UnauthRoleArn": "arn:aws:iam::654654566177:role/amplify-sightingsapp-dev-47900-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::654654566177:role/amplify-sightingsapp-dev-47900-authRole",
+      "AuthRoleName": "amplify-sightingsapp-dev-8ab03-authRole",
+      "UnauthRoleArn": "arn:aws:iam::654654566177:role/amplify-sightingsapp-dev-8ab03-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::654654566177:role/amplify-sightingsapp-dev-8ab03-authRole",
       "Region": "eu-north-1",
-      "DeploymentBucketName": "amplify-sightingsapp-dev-47900-deployment",
-      "UnauthRoleName": "amplify-sightingsapp-dev-47900-unauthRole",
-      "StackName": "amplify-sightingsapp-dev-47900",
-      "StackId": "arn:aws:cloudformation:eu-north-1:654654566177:stack/amplify-sightingsapp-dev-47900/8f3ba080-4529-11ef-9352-0e2deca0118c",
-      "AmplifyAppId": "d1v2llwaen9eh0"
+      "DeploymentBucketName": "amplify-sightingsapp-dev-8ab03-deployment",
+      "UnauthRoleName": "amplify-sightingsapp-dev-8ab03-unauthRole",
+      "StackName": "amplify-sightingsapp-dev-8ab03",
+      "StackId": "arn:aws:cloudformation:eu-north-1:654654566177:stack/amplify-sightingsapp-dev-8ab03/ff367500-482a-11ef-8c7c-0ed4071d27ec",
+      "AmplifyAppId": "d14t4rtbvrhb0s"
     },
     "categories": {
-      "auth": {
-        "sightingsapp552de5f2": {}
-      },
-      "storage": {
-        "SightingPhotosStorage": {}
-      },
       "api": {
         "sightingsapp": {}
+      },
+      "auth": {
+        "sightingsapp737e0a1e": {}
+      },
+      "storage": {
+        "MediaStorageSightingsApp": {}
       }
     }
   }

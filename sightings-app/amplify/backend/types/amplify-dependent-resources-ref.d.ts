@@ -2,11 +2,12 @@ export type AmplifyDependentResourcesAttributes = {
   "api": {
     "sightingsapp": {
       "GraphQLAPIEndpointOutput": "string",
-      "GraphQLAPIIdOutput": "string"
+      "GraphQLAPIIdOutput": "string",
+      "GraphQLAPIKeyOutput": "string"
     }
   },
   "auth": {
-    "sightingsapp552de5f2": {
+    "sightingsapp737e0a1e": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -17,7 +18,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "SightingPhotosStorage": {
+    "MediaStorageSightingsApp": {
       "BucketName": "string",
       "Region": "string"
     }

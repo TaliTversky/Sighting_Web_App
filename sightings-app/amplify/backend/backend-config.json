@@ -1,23 +1,17 @@
 {
   "api": {
     "sightingsapp": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "sightingsapp552de5f2"
-        }
-      ],
+      "dependsOn": [],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authsightingsapp552de5f2"
-            }
+            "apiKeyConfig": {
+              "apiKeyExpirationDate": "2025-07-22T13:16:23.797Z",
+              "apiKeyExpirationDays": 365,
+              "description": "sightingappkey"
+            },
+            "authenticationType": "API_KEY"
           }
         }
       },
@@ -26,7 +20,7 @@
     }
   },
   "auth": {
-    "sightingsapp552de5f2": {
+    "sightingsapp737e0a1e": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -54,7 +48,7 @@
     }
   },
   "storage": {
-    "SightingPhotosStorage": {
+    "MediaStorageSightingsApp": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"

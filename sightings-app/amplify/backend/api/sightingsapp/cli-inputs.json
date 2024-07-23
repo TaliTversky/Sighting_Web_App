@@ -4,10 +4,10 @@
     "apiName": "sightingsapp",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authsightingsapp552de5f2"
-    },
-    "conflictResolution": {},
-    "additionalAuthTypes": []
+      "mode": "API_KEY",
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2025-07-22T13:16:23.797Z",
+      "keyDescription": "sightingappkey"
+    }
   }
 }
