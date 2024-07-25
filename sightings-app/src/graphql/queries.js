@@ -6,9 +6,13 @@ export const getSighting = /* GraphQL */ `
     getSighting(id: $id) {
       id
       date
-      time
+      Site
       speciesCommonName
       speciesScienceName
+      species
+      count
+      reporter
+      labels
       createdAt
       updatedAt
       __typename
@@ -25,9 +29,13 @@ export const listSightings = /* GraphQL */ `
       items {
         id
         date
-        time
+        Site
         speciesCommonName
         speciesScienceName
+        species
+        count
+        reporter
+        labels
         createdAt
         updatedAt
         __typename

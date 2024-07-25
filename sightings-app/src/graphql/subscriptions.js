@@ -6,9 +6,13 @@ export const onCreateSighting = /* GraphQL */ `
     onCreateSighting(filter: $filter) {
       id
       date
-      time
+      Site
       speciesCommonName
       speciesScienceName
+      species
+      count
+      reporter
+      labels
       createdAt
       updatedAt
       __typename
@@ -20,9 +24,13 @@ export const onUpdateSighting = /* GraphQL */ `
     onUpdateSighting(filter: $filter) {
       id
       date
-      time
+      Site
       speciesCommonName
       speciesScienceName
+      species
+      count
+      reporter
+      labels
       createdAt
       updatedAt
       __typename
@@ -34,9 +42,13 @@ export const onDeleteSighting = /* GraphQL */ `
     onDeleteSighting(filter: $filter) {
       id
       date
-      time
+      Site
       speciesCommonName
       speciesScienceName
+      species
+      count
+      reporter
+      labels
       createdAt
       updatedAt
       __typename

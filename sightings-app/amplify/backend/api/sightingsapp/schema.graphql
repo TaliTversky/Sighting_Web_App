@@ -5,7 +5,11 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONL
 type Sighting @model {
   id: ID!
   date: AWSDate
-  time: AWSTime
+  Site: String
   speciesCommonName: String
   speciesScienceName: String
+  species: String
+  count: String
+  reporter: String
+  labels: String
 }

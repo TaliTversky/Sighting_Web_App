@@ -1,7 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import SiteNav from './components/common/SiteNav';
 import SiteFooter from './components/common/SiteFooter';
 import HomePage from './components/home/HomePage';
 import SightingPage from './components/Sightings/SightingPage';
@@ -13,8 +12,8 @@ import { generateClient } from 'aws-amplify/api';
 import config from './amplifyconfiguration';
 import awsmobile from './aws-exports';
 import { StorageImage, StorageManager } from '@aws-amplify/ui-react-storage';
-
-
+import SideBar from "./components/common/sideBar/SideBar";
+import HeadBar from "./components/common/HeaderBar/HeaderBar";
 
 
 const App = ({ signOut, user }) => {
@@ -23,12 +22,13 @@ const App = ({ signOut, user }) => {
 
   return (
       <div>
-        <SiteNav logOut={signOut}/>
+        
+        <HeadBar logOut={signOut}/>
         <Routes>
           <Route path='*' element={<HomePage/>} />
           <Route path='/allsightings' element={<SightingPage/>} />
         </Routes>
-
+        <SideBar />
         <StorageManager path="public/" maxFileCount={3} /> 
         <SiteFooter />
       </div>
