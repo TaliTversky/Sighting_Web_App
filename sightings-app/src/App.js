@@ -17,8 +17,8 @@ import "@aws-amplify/ui-react/styles.css";
 // import { StorageImage, StorageManager } from "@aws-amplify/ui-react-storage";
 // import SideBar from "./components copy/common/sideBar/SideBar";
 // import HeadBar from "./components copy/common/HeaderBar/HeaderBar";
-import HeadBar from "./components copy/headerBar/HeaderBar";
-import SideBar from "./components copy/sideBar/SideBar";
+import HeadBar from "./components/headerBar/HeaderBar";
+import SideBar from "./components/sideBar/SideBar";
 
 const App = ({ signOut, user }) => {
   return (

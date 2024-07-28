@@ -1,4 +1,4 @@
-import ImageGallery from "../components copy/ImageGallery/ImageGallery";
+import ImageGallery from "../components/ImageGallery/ImageGallery";
 
 const Page1 = () => {
   return <div>{/* <ImageGallery /> */}</div>;

@@ -1,5 +1,5 @@
-import Table from "../components copy/Table/Table";
-import TableHeaders from "../components copy/TableHeaders/TableHeaders";
+import Table from "../components/Table/Table";
+import TableHeaders from "../components/TableHeaders/TableHeaders";
 
 const Page2 = () => {
   return (
