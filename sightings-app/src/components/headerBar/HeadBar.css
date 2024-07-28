@@ -3,6 +3,7 @@
   height: 55px;
   background-color: #fff;
   display: flex;
+  justify-content: flex-end; /* Align children to the right */
   align-items: center;
   padding: 0 20px;
   z-index: 1000;
@@ -11,5 +12,13 @@
 }
 
 .logOutButton {
-  align-items: right;
+  margin-left: auto; /* Push the button to the right */
+
+  background: rgb(223, 229, 239);
+  /* color: white; */
+  color: rgb(71, 100, 147);
+  border: none;
+  padding: 5px 15px;
+  border-radius: 4px;
+  font-size: smaller;
 }

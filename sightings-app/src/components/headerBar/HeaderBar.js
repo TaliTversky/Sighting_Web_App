@@ -1,5 +1,4 @@
 import "./HeadBar.css";
-import Button from "react-bootstrap/Button";
 
 function HeadBar(props) {
   const handleLogout = () => {
@@ -8,7 +7,7 @@ function HeadBar(props) {
   return (
     <div className="head-bar">
       <button className="logOutButton" onClick={handleLogout}>
-        Logout
+        Log Out
       </button>
     </div>
   );
