@@ -7,9 +7,9 @@
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2025-07-22T13:16:23.797Z",
+              "apiKeyExpirationDate": "2025-08-10T08:52:30.165Z",
               "apiKeyExpirationDays": 365,
-              "description": "sightingappkey"
+              "description": ""
             },
             "authenticationType": "API_KEY"
           }
@@ -20,7 +20,7 @@
     }
   },
   "auth": {
-    "sightingsapp737e0a1e": {
+    "sightingsapp24e1ca70": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -48,7 +48,7 @@
     }
   },
   "storage": {
-    "MediaStorageSightingsApp": {
+    "SightingMediaStorage": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"

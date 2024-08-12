@@ -5,7 +5,7 @@ import { Column } from "primereact/column";
 import { generateClient } from "aws-amplify/api";
 import { v4 as uuid } from "uuid";
 import { createSighting } from "../../graphql/mutations";
-import { listSightings } from "../../graphql/queries";
+import { listObservations } from "../../graphql/queries";
 import { useEffect, useState } from "react";
 
 const client = generateClient();
@@ -21,9 +21,9 @@ function Table() {
   async function fetchSightings() {
     try {
       const sightingData = await client.graphql({
-        query: listSightings,
+        query: listObservations,
       });
-      const sightings = sightingData.data.listSightings.items;
+      const sightings = sightingData.data.listObservations.items;
       setSightings(sightings);
       console.log(sightings);
     } catch (err) {
@@ -76,7 +76,7 @@ function Table() {
           sortable
         />
         <Column
-          field="Site"
+          field="site"
           header="Site"
           bodyClassName="padded-cell"
           sortable
@@ -88,7 +88,7 @@ function Table() {
           sortable
         />
         <Column
-          field="speciesScienceName"
+          field="specie"
           header="Species"
           body={nameBodyTemplate}
           bodyClassName="padded-cell"

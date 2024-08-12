@@ -1,0 +1,14 @@
+{
+  "resourceName": "SightingMediaStorage",
+  "policyUUID": "274cd05f",
+  "bucketName": "sightingsapp9b61e996226940629a39ed18bc420174",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
