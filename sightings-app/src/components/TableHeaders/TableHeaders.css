@@ -54,11 +54,12 @@
 
 .all-observations-number {
   /* margin: 0 10px; */
-  margin-right: auto;
-  margin-left: 10px;
-  margin-top: 6px;
-  font-weight: normal;
-  color: rgba(131, 131, 131, 1);
+  margin-right: auto !important;
+  margin-left: 10px !important;
+  margin-top: 6px !important;
+  font-weight: normal !important;
+  color: rgba(131, 131, 131, 1) !important;
+  font-size: medium !important;
 }
 
 .new-observation-button {

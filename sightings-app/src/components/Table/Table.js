@@ -3,8 +3,8 @@ import "./SpeciesTags.css";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { generateClient } from "aws-amplify/api";
-import { v4 as uuid } from "uuid";
-import { createSighting } from "../../graphql/mutations";
+// import { v4 as uuid } from "uuid";
+// import { createSighting } from "../../graphql/mutations";
 import { listSightings } from "../../graphql/queries";
 import { useEffect, useState } from "react";
 
