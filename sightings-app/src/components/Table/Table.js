@@ -6,6 +6,7 @@ import { generateClient } from "aws-amplify/api";
 import { v4 as uuid } from "uuid";
 import { createSighting } from "../../graphql/mutations";
 import { listObservations } from "../../graphql/queries";
+
 import { useEffect, useState } from "react";
 
 const client = generateClient();
