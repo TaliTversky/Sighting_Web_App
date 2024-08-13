@@ -2,14 +2,123 @@
 # all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
-type Sighting @model {
+enum SpecieType {
+  SHARK
+  RAY
+  CHIMAERA
+}
+
+enum Substrate {
+  NA
+  MUDDY
+  HARD
+  ROCKY
+  SANDY
+  SEAWEED_BEDS_OR_PATCHES
+  WATER_COLUMN
+  CORALS
+}
+
+enum ConservationStatus {
+  CR
+  EN
+  VU
+  NT
+  LC
+  NE
+  INV
+  DD
+  NA
+  JOINT
+}
+
+enum TimeName {
+  MORNING
+  AFTERNOON
+  EVENING
+  NIGHT
+  DAWN
+  LIGHT
+  DARK
+  DUSK
+  UNCPECIFIED
+  EXACT
+}
+
+enum Condition {
+  NA
+  ALIVE_AND_FREE
+  FOUND_DEAD
+  CAUGHT_AND_RELEASED
+  LANDED_OR_KILLED
+  FOUND_INJURED
+  FISHED_UNKNOWN
+}
+
+enum Sex {
+  NA
+  FEMALE
+  MALE
+  BOTH
+}
+
+enum Stage {
+  NA
+  JUVENILE
+  ADULT
+  SUBADULT
+  EGG
+  MIX
+}
+
+type Observation @model {
+  id: ID! 
+  date: AWSDate! 
+  time: AWSTime 
+  timeName: TimeName 
+  reportType: String
+  site: String
+  country: String
+  specieCommonName: String
+  specie: String
+  count: Int! 
+  reporter: String 
+  photographer: String
+  mediaSource: String 
+  stage: Stage 
+  sex: Sex 
+  condition: Condition 
+  length: Int
+  diskLength: Int
+  width: Int
+  depth: Float 
+  distance: Int 
+  temperature: Float   
+  latitude: Float 
+  longitude: Float
+  description: String
+  comments: String
+  urlLinks: [AWSURL]
+  byUser: String
+  group: String
+  checkedByUser: AWSEmail
+  substrate: [Substrate]
+  weight: Float
+  Media: [String]
+}
+
+type Media @model {
   id: ID!
-  date: AWSDate
-  Site: String
-  speciesCommonName: String
-  speciesScienceName: String
-  species: String
-  count: String
-  reporter: String
-  labels: String
+  Image: String
+  specie: String
+  Date: AWSDate
+  time: AWSTime
+  place: String
+  type: String
+  quality: Int
+  lifeStage: [Stage]
+  activity: [String]
+  characters: [String]
+  behavior: [String]
+  observationID: ID! @index(name: "byObservation")
 }

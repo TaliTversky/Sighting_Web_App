@@ -1,63 +1,210 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createSighting = /* GraphQL */ `
-  mutation CreateSighting(
-    $input: CreateSightingInput!
-    $condition: ModelSightingConditionInput
+export const createObservation = /* GraphQL */ `
+  mutation CreateObservation(
+    $input: CreateObservationInput!
+    $condition: ModelObservationConditionInput
   ) {
-    createSighting(input: $input, condition: $condition) {
+    createObservation(input: $input, condition: $condition) {
       id
       date
-      Site
-      speciesCommonName
-      speciesScienceName
-      species
+      time
+      timeName
+      reportType
+      site
+      country
+      specieCommonName
+      specie
       count
       reporter
-      labels
+      photographer
+      mediaSource
+      stage
+      sex
+      condition
+      length
+      diskLength
+      width
+      depth
+      distance
+      temperature
+      latitude
+      longitude
+      description
+      comments
+      urlLinks
+      byUser
+      group
+      checkedByUser
+      substrate
+      weight
+      Media
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const updateSighting = /* GraphQL */ `
-  mutation UpdateSighting(
-    $input: UpdateSightingInput!
-    $condition: ModelSightingConditionInput
+export const updateObservation = /* GraphQL */ `
+  mutation UpdateObservation(
+    $input: UpdateObservationInput!
+    $condition: ModelObservationConditionInput
   ) {
-    updateSighting(input: $input, condition: $condition) {
+    updateObservation(input: $input, condition: $condition) {
       id
       date
-      Site
-      speciesCommonName
-      speciesScienceName
-      species
+      time
+      timeName
+      reportType
+      site
+      country
+      specieCommonName
+      specie
       count
       reporter
-      labels
+      photographer
+      mediaSource
+      stage
+      sex
+      condition
+      length
+      diskLength
+      width
+      depth
+      distance
+      temperature
+      latitude
+      longitude
+      description
+      comments
+      urlLinks
+      byUser
+      group
+      checkedByUser
+      substrate
+      weight
+      Media
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const deleteSighting = /* GraphQL */ `
-  mutation DeleteSighting(
-    $input: DeleteSightingInput!
-    $condition: ModelSightingConditionInput
+export const deleteObservation = /* GraphQL */ `
+  mutation DeleteObservation(
+    $input: DeleteObservationInput!
+    $condition: ModelObservationConditionInput
   ) {
-    deleteSighting(input: $input, condition: $condition) {
+    deleteObservation(input: $input, condition: $condition) {
       id
       date
-      Site
-      speciesCommonName
-      speciesScienceName
-      species
+      time
+      timeName
+      reportType
+      site
+      country
+      specieCommonName
+      specie
       count
       reporter
-      labels
+      photographer
+      mediaSource
+      stage
+      sex
+      condition
+      length
+      diskLength
+      width
+      depth
+      distance
+      temperature
+      latitude
+      longitude
+      description
+      comments
+      urlLinks
+      byUser
+      group
+      checkedByUser
+      substrate
+      weight
+      Media
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const createMedia = /* GraphQL */ `
+  mutation CreateMedia(
+    $input: CreateMediaInput!
+    $condition: ModelMediaConditionInput
+  ) {
+    createMedia(input: $input, condition: $condition) {
+      id
+      Image
+      specie
+      Date
+      time
+      place
+      type
+      quality
+      lifeStage
+      activity
+      characters
+      behavior
+      observationID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateMedia = /* GraphQL */ `
+  mutation UpdateMedia(
+    $input: UpdateMediaInput!
+    $condition: ModelMediaConditionInput
+  ) {
+    updateMedia(input: $input, condition: $condition) {
+      id
+      Image
+      specie
+      Date
+      time
+      place
+      type
+      quality
+      lifeStage
+      activity
+      characters
+      behavior
+      observationID
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteMedia = /* GraphQL */ `
+  mutation DeleteMedia(
+    $input: DeleteMediaInput!
+    $condition: ModelMediaConditionInput
+  ) {
+    deleteMedia(input: $input, condition: $condition) {
+      id
+      Image
+      specie
+      Date
+      time
+      place
+      type
+      quality
+      lifeStage
+      activity
+      characters
+      behavior
+      observationID
       createdAt
       updatedAt
       __typename

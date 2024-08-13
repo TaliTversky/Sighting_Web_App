@@ -7,7 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "auth": {
-    "sightingsapp737e0a1e": {
+    "sightingsapp24e1ca70": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -18,7 +18,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "MediaStorageSightingsApp": {
+    "SightingMediaStorage": {
       "BucketName": "string",
       "Region": "string"
     }
