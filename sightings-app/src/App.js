@@ -2,23 +2,12 @@ import Home from "./pages/Home";
 import Page1 from "./pages/Page1";
 import Page2 from "./pages/Page2";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import SiteFooter from "./components/common/SiteFooter";
-// import HomePage from "./components copy/home/HomePage";
-// import SightingPage from "./components/Sightings/SightingPage";
-import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
-// import { Amplify } from "aws-amplify";
-// import { signOut } from "aws-amplify/auth";
-// import { generateClient } from "aws-amplify/api";
-// import config from "./amplifyconfiguration";
-// import awsmobile from "./aws-exports";
-// import { StorageImage, StorageManager } from "@aws-amplify/ui-react-storage";
-// import SideBar from "./components copy/common/sideBar/SideBar";
-// import HeadBar from "./components copy/common/HeaderBar/HeaderBar";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css"; //this is for the login screen design
 import HeadBar from "./components/headerBar/HeaderBar";
 import SideBar from "./components/sideBar/SideBar";
+import "./App.css";
 
 const App = ({ signOut, user }) => {
   return (

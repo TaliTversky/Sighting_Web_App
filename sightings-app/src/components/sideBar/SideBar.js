@@ -4,6 +4,7 @@ import "./SideBar.css";
 import mecoIcon from "../../images/meco-icon.png";
 import homeIcon from "../../images/home-icon.png";
 import imagesIcon from "../../images/images-icon.png";
+import binocularsIcon from "../../images/binoculars.png";
 
 const SideBar = () => {
   return (
@@ -19,7 +20,7 @@ const SideBar = () => {
           <img src={imagesIcon} alt="images" />
         </Link>
         <Link to="/page2">
-          <img src={imagesIcon} alt="images" />
+          <img src={binocularsIcon} alt="images" />
         </Link>
       </div>
     </div>
