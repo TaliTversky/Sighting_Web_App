@@ -20,6 +20,12 @@
       },
       "api": {
         "sightingsapp": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d196956ykp2bcc",
+          "type": "manual"
+        }
       }
     }
   }

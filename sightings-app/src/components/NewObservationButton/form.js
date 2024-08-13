@@ -1,17 +1,9 @@
 import { useState, useEffect } from 'react';
-
+import "./NewObservationButton.css";
 import { generateClient } from '@aws-amplify/api';
 import { getUrl, uploadData } from 'aws-amplify/storage';
 import * as queries from '../../graphql/queries';
 import * as mutations from '../../graphql/mutations';
-
-import { Amplify } from 'aws-amplify';
-import config from '../../amplifyconfiguration';
-
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Modal } from 'react-bootstrap';
@@ -26,30 +18,6 @@ function ObservationForm() {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    const [formStep, setFormStep] = useState(0); // 0 = main form, 1 = image details, 2 = review/submit
-    const [imageDetails, setImageDetails] = useState([]);
-
-    const handleSubmitImageDetails = (details) => {
-        setImageDetails(details);
-        setFormStep(2); // Proceed to review/submit
-    };
-
-    const handleBackToMainForm = () => {
-        setFormStep(0); // Go back to main form
-    };
-
-    if (formStep === 1) {
-        return <ImageDetailsForm files={files} onSubmit={handleSubmitImageDetails} onBack={handleBackToMainForm} />;
-    }
-
-    const handleFileChange = (event) => {
-        const newFiles = Array.from(event.target.files);
-        setFiles(newFiles);
-        if (newFiles.length > 0) {
-            setFormStep(1); // Proceed to add details for images
-        }
-    };
 
     
     const [files, setFiles] = useState([]);
@@ -151,12 +119,7 @@ function ObservationForm() {
                 weight 
             } = formData;
             const { username, userId } = await getCurrentUser()
-            console.log('>>>>> Here we got the form data ', username, userId, Pic, formData)
-        
-
-            // Upload pic to S3
-            //Storage.configure({ region: 'eu-north-1'});
-            //const key = await uploadData({path: `public/${Observation.id}-${file.name}.png`, data: Pic, options: {contentType: 'image/png'}});
+            console.log('>>>>> Here we got the form data ', username, userId, formData)
             
             const imageKeys = await Promise.all(
                 Array.from(files).map(async (file) => {
@@ -208,12 +171,7 @@ function ObservationForm() {
 
     return (
         <>
-        <Container>
-            <Row className="px-4 my-5">
-                <Col><h1>Sightings</h1></Col>
-            </Row>
-            <Row className="px-4 my-5">
-                    <Button variant="primary" onClick={handleShow}>
+                    <Button variant="primary" className="observation-button" onClick={handleShow}>
                      + New Observation
                     </Button>
                     <Modal show={show} onHide={handleClose} centered>
@@ -440,12 +398,10 @@ function ObservationForm() {
 
                             </Form.Group>  
 
-                        <Button variant="primary" type="button" onClick={addNewObservation}>Submit &gt;&gt;</Button>&nbsp;   
+                        <Button variant="primary" type="button" className="observation-button" onClick={addNewObservation}>Submit &gt;&gt;</Button>&nbsp;   
                     </Form>
                     </Modal.Body>
                     </Modal>
-            </Row>
-        </Container>
         </>
     )
 }
