@@ -1,4 +1,4 @@
-import ObservationForm from "../NewObservationButton/form";
+import ObservationForm from "../NewObservationButton/form2";
 import "./TableHeaders.css";
 
 const TableHeaders = () => {

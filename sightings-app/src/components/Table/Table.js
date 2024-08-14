@@ -3,8 +3,6 @@ import "./SpeciesTags.css";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { generateClient } from "aws-amplify/api";
-import { v4 as uuid } from "uuid";
-import { createSighting } from "../../graphql/mutations";
 import { listObservations } from "../../graphql/queries";
 
 import { useEffect, useState } from "react";
@@ -102,8 +100,8 @@ function Table() {
           sortable
         />
         <Column
-          field="reporter"
-          header="Reporter"
+          field="Media"
+          header="media"
           bodyClassName="padded-cell"
           sortable
         />
