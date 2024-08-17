@@ -39,6 +39,7 @@ export const createObservation = /* GraphQL */ `
       checkedByUser
       substrate
       weight
+      labels
       Media
       createdAt
       updatedAt
@@ -84,6 +85,7 @@ export const updateObservation = /* GraphQL */ `
       checkedByUser
       substrate
       weight
+      labels
       Media
       createdAt
       updatedAt
@@ -129,6 +131,7 @@ export const deleteObservation = /* GraphQL */ `
       checkedByUser
       substrate
       weight
+      labels
       Media
       createdAt
       updatedAt

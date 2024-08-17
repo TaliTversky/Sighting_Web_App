@@ -53,6 +53,7 @@ export declare type NewForm1InputValues = {
     checkedByUser?: string;
     substrate?: string[];
     weight?: number;
+    labels?: string[];
     Media?: string[];
 };
 export declare type NewForm1ValidationValues = {
@@ -87,6 +88,7 @@ export declare type NewForm1ValidationValues = {
     checkedByUser?: ValidationFunction<string>;
     substrate?: ValidationFunction<string>;
     weight?: ValidationFunction<number>;
+    labels?: ValidationFunction<string>;
     Media?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -123,6 +125,7 @@ export declare type NewForm1OverridesProps = {
     checkedByUser?: PrimitiveOverrideProps<TextFieldProps>;
     substrate?: PrimitiveOverrideProps<SelectFieldProps>;
     weight?: PrimitiveOverrideProps<TextFieldProps>;
+    labels?: PrimitiveOverrideProps<TextFieldProps>;
     Media?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NewForm1Props = React.PropsWithChildren<{

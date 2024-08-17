@@ -1,117 +1,124 @@
-/* .popup-root {
-  background: rgba(0, 0, 0, 0.2);
-  bottom: 0;
-  left: 0;
+/* Ensuring modal overlay is correctly stacked */
+.popup-root {
+  background: rgba(0, 0, 0, 0.5);
   position: fixed;
-  right: 0;
   top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
 }
 
-.popup-content {
+/* Styling for the modal content with higher specificity */
+div.popup-content {
   background: white;
-  left: 50%;
-  padding: 0 2em 2em;
-  position: absolute;
+  border-radius: 8px;
+  padding: 20px;
+  position: fixed;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 1050;
 }
 
-.observation-button {
-  background: rgba(29, 45, 69, 1);
+/* Specific button styling to ensure they are styled correctly */
+button.observation-button {
+  background-color: #1D2D45;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
   margin: 6px;
-}
-
-.observation-button:hover {
-  background: rgba(29, 45, 69, 1);
-  color: white;
-}
-
-.observation-button:active {
-  background: rgba(29, 45, 69, 1);
-  color: white;
-}
-
-.form-container {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  margin: 5px;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin-top: auto;
-} */
-
-.popup-root {
-  background: rgba(0, 0, 0, 0.2);
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
-}
-
-.popup-content {
-  background: white;
-  left: 50%;
-  /* max-width: 500px; */
-  padding: 1em 2em 2em;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 10px; /* Add rounded corners */
-}
-
-.observation-button {
-  background: rgba(29, 45, 69, 1);
-  color: white;
-  border: none;
-  padding: 7px 15px; /* Reduced padding */
-  border-radius: 4px;
-  font-size: 14px; /* Smaller text */
+  font-size: smaller;
   font-weight: 600;
 }
 
-
-.observation-button:hover {
-  background: rgba(29, 45, 69, 1);
-  color: white;
+button.observation-button:hover,
+button.observation-button:focus,
+button.observation-button:active {
+  background-color: #163356;
 }
 
-.observation-button:active {
-  background: rgba(29, 45, 69, 1);
-  color: white;
-}
-
-.form-container {
+/* Specific form container adjustments */
+div.form-container {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  margin: 5px;
+  width: 100%;
 }
 
-.form-container label {
-  margin-bottom: 10px; /* Add space between form lines */
+/* Error styling for feedback with increased visibility */
+span.p-error {
+  color: #ff3333;
+  font-size: 0.8em;
 }
 
-.form-container label input {
-  margin-left: 5px;
+/* Styling for invalid input fields */
+.p-invalid .p-inputtext {
+  border-color: #ff3333;
 }
 
-/* .button-container {
-  display: flex;
-  justify-content: stretch;
-  margin-top: auto;
-} */
+/* Z-index fix for dropdown panels to ensure they are on top */
+.p-multiselect-panel {
+  z-index: 1100 !important;
+}
+
+/* Default styling for primary buttons */
+.p-button-primary {
+  background-color: #1D2D45;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 6px;
+  font-size: smaller;
+  font-weight: 600;
+}
+
+.p-button-primary:hover {
+  background-color: #e1e1e1; /* Slightly darker on hover */
+}
+
+.p-button-primary:active {
+  background-color: #d0d0d0; /* Even darker when active */
+}
+
+/* Default styling for secondary buttons */
+.p-button-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 6px;
+  font-size: smaller;
+  font-weight: 600;
+}
+
+.p-button-secondary:hover {
+  background-color: #e1e1e1; /* Slightly darker on hover */
+}
+
+.p-button-secondary:active {
+  background-color: #d0d0d0; /* Even darker when active */
+}
+
+.card {
+  margin-top: 20px;
+  margin-bottom: 20px; /* Adds space below each card */
+  /* padding: 10px;       Optional: Adds space inside each card */
+}
+
+.card .activity-container {
+  margin-bottom: 0; /* Assuming 'activity-container' is a class you add to the div containing the Activity input */
+}
+

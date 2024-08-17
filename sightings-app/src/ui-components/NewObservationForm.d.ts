@@ -50,6 +50,7 @@ export declare type NewObservationFormInputValues = {
     diskLength?: number;
     width?: number;
     group?: string;
+    labels?: string[];
     Media?: string[];
 };
 export declare type NewObservationFormValidationValues = {
@@ -81,6 +82,7 @@ export declare type NewObservationFormValidationValues = {
     diskLength?: ValidationFunction<number>;
     width?: ValidationFunction<number>;
     group?: ValidationFunction<string>;
+    labels?: ValidationFunction<string>;
     Media?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -114,6 +116,7 @@ export declare type NewObservationFormOverridesProps = {
     diskLength?: PrimitiveOverrideProps<TextFieldProps>;
     width?: PrimitiveOverrideProps<TextFieldProps>;
     group?: PrimitiveOverrideProps<TextFieldProps>;
+    labels?: PrimitiveOverrideProps<TextFieldProps>;
     Media?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type NewObservationFormProps = React.PropsWithChildren<{

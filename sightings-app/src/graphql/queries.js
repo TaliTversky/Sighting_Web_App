@@ -36,6 +36,7 @@ export const getObservation = /* GraphQL */ `
       checkedByUser
       substrate
       weight
+      labels
       Media
       createdAt
       updatedAt
@@ -83,6 +84,7 @@ export const listObservations = /* GraphQL */ `
         checkedByUser
         substrate
         weight
+        labels
         Media
         createdAt
         updatedAt

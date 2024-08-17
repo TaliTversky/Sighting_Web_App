@@ -223,6 +223,7 @@ export default function ObservationUpdateForm(props) {
     checkedByUser: "",
     substrate: [],
     weight: "",
+    labels: [],
     Media: [],
   };
   const [date, setDate] = React.useState(initialValues.date);
@@ -268,6 +269,7 @@ export default function ObservationUpdateForm(props) {
   );
   const [substrate, setSubstrate] = React.useState(initialValues.substrate);
   const [weight, setWeight] = React.useState(initialValues.weight);
+  const [labels, setLabels] = React.useState(initialValues.labels);
   const [Media, setMedia] = React.useState(initialValues.Media);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -307,6 +309,8 @@ export default function ObservationUpdateForm(props) {
     setSubstrate(cleanValues.substrate ?? []);
     setCurrentSubstrateValue("");
     setWeight(cleanValues.weight);
+    setLabels(cleanValues.labels ?? []);
+    setCurrentLabelsValue("");
     setMedia(cleanValues.Media ?? []);
     setCurrentMediaValue("");
     setErrors({});
@@ -332,6 +336,8 @@ export default function ObservationUpdateForm(props) {
   const urlLinksRef = React.createRef();
   const [currentSubstrateValue, setCurrentSubstrateValue] = React.useState("");
   const substrateRef = React.createRef();
+  const [currentLabelsValue, setCurrentLabelsValue] = React.useState("");
+  const labelsRef = React.createRef();
   const [currentMediaValue, setCurrentMediaValue] = React.useState("");
   const MediaRef = React.createRef();
   const getDisplayValue = {
@@ -381,6 +387,7 @@ export default function ObservationUpdateForm(props) {
     checkedByUser: [{ type: "Email" }],
     substrate: [],
     weight: [],
+    labels: [],
     Media: [],
   };
   const runValidationTasks = async (
@@ -440,6 +447,7 @@ export default function ObservationUpdateForm(props) {
           checkedByUser: checkedByUser ?? null,
           substrate: substrate ?? null,
           weight: weight ?? null,
+          labels: labels ?? null,
           Media: Media ?? null,
         };
         const validationResponses = await Promise.all(
@@ -533,6 +541,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -589,6 +598,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -644,6 +654,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -750,6 +761,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -805,6 +817,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -860,6 +873,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -915,6 +929,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -970,6 +985,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1029,6 +1045,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1084,6 +1101,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1139,6 +1157,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1194,6 +1213,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1249,6 +1269,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1335,6 +1356,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1411,6 +1433,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1506,6 +1529,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1565,6 +1589,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1624,6 +1649,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1683,6 +1709,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1742,6 +1769,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1801,6 +1829,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1860,6 +1889,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1919,6 +1949,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1974,6 +2005,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2029,6 +2061,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2080,6 +2113,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2160,6 +2194,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2215,6 +2250,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2270,6 +2306,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser: value,
               substrate,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2321,6 +2358,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate: values,
               weight,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2447,6 +2485,7 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight: value,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2498,6 +2537,84 @@ export default function ObservationUpdateForm(props) {
               checkedByUser,
               substrate,
               weight,
+              labels: values,
+              Media,
+            };
+            const result = onChange(modelFields);
+            values = result?.labels ?? values;
+          }
+          setLabels(values);
+          setCurrentLabelsValue("");
+        }}
+        currentFieldValue={currentLabelsValue}
+        label={"Labels"}
+        items={labels}
+        hasError={errors?.labels?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("labels", currentLabelsValue)
+        }
+        errorMessage={errors?.labels?.errorMessage}
+        setFieldValue={setCurrentLabelsValue}
+        inputFieldRef={labelsRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Labels"
+          isRequired={false}
+          isReadOnly={false}
+          value={currentLabelsValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.labels?.hasError) {
+              runValidationTasks("labels", value);
+            }
+            setCurrentLabelsValue(value);
+          }}
+          onBlur={() => runValidationTasks("labels", currentLabelsValue)}
+          errorMessage={errors.labels?.errorMessage}
+          hasError={errors.labels?.hasError}
+          ref={labelsRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "labels")}
+        ></TextField>
+      </ArrayField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              date,
+              time,
+              timeName,
+              reportType,
+              site,
+              country,
+              specieCommonName,
+              specie,
+              count,
+              reporter,
+              photographer,
+              mediaSource,
+              stage,
+              sex,
+              condition,
+              length,
+              diskLength,
+              width,
+              depth,
+              distance,
+              temperature,
+              latitude,
+              longitude,
+              description,
+              comments,
+              urlLinks,
+              byUser,
+              group,
+              checkedByUser,
+              substrate,
+              weight,
+              labels,
               Media: values,
             };
             const result = onChange(modelFields);

@@ -53,6 +53,7 @@ export declare type ObservationUpdateFormInputValues = {
     checkedByUser?: string;
     substrate?: string[];
     weight?: number;
+    labels?: string[];
     Media?: string[];
 };
 export declare type ObservationUpdateFormValidationValues = {
@@ -87,6 +88,7 @@ export declare type ObservationUpdateFormValidationValues = {
     checkedByUser?: ValidationFunction<string>;
     substrate?: ValidationFunction<string>;
     weight?: ValidationFunction<number>;
+    labels?: ValidationFunction<string>;
     Media?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -123,6 +125,7 @@ export declare type ObservationUpdateFormOverridesProps = {
     checkedByUser?: PrimitiveOverrideProps<TextFieldProps>;
     substrate?: PrimitiveOverrideProps<SelectFieldProps>;
     weight?: PrimitiveOverrideProps<TextFieldProps>;
+    labels?: PrimitiveOverrideProps<TextFieldProps>;
     Media?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type ObservationUpdateFormProps = React.PropsWithChildren<{

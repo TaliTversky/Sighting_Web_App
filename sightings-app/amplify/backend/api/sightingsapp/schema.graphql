@@ -104,6 +104,7 @@ type Observation @model {
   checkedByUser: AWSEmail
   substrate: [Substrate]
   weight: Float
+  labels: [String]
   Media: [String]
 }
 

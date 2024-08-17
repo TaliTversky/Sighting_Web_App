@@ -218,6 +218,7 @@ export default function NewObservationForm(props) {
     diskLength: "",
     width: "",
     group: "",
+    labels: [],
     Media: [],
   };
   const [date, setDate] = React.useState(initialValues.date);
@@ -258,6 +259,7 @@ export default function NewObservationForm(props) {
   const [diskLength, setDiskLength] = React.useState(initialValues.diskLength);
   const [width, setWidth] = React.useState(initialValues.width);
   const [group, setGroup] = React.useState(initialValues.group);
+  const [labels, setLabels] = React.useState(initialValues.labels);
   const [Media, setMedia] = React.useState(initialValues.Media);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
@@ -290,12 +292,16 @@ export default function NewObservationForm(props) {
     setDiskLength(initialValues.diskLength);
     setWidth(initialValues.width);
     setGroup(initialValues.group);
+    setLabels(initialValues.labels);
+    setCurrentLabelsValue("");
     setMedia(initialValues.Media);
     setCurrentMediaValue("");
     setErrors({});
   };
   const [currentSubstrateValue, setCurrentSubstrateValue] = React.useState("");
   const substrateRef = React.createRef();
+  const [currentLabelsValue, setCurrentLabelsValue] = React.useState("");
+  const labelsRef = React.createRef();
   const [currentMediaValue, setCurrentMediaValue] = React.useState("");
   const MediaRef = React.createRef();
   const getDisplayValue = {
@@ -342,6 +348,7 @@ export default function NewObservationForm(props) {
     diskLength: [],
     width: [],
     group: [],
+    labels: [],
     Media: [],
   };
   const runValidationTasks = async (
@@ -398,6 +405,7 @@ export default function NewObservationForm(props) {
           diskLength,
           width,
           group,
+          labels,
           Media,
         };
         const validationResponses = await Promise.all(
@@ -490,6 +498,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -543,6 +552,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -595,6 +605,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -702,6 +713,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -754,6 +766,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -837,6 +850,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -910,6 +924,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1002,6 +1017,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1058,6 +1074,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1114,6 +1131,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1170,6 +1188,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1226,6 +1245,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1278,6 +1298,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1330,6 +1351,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1378,6 +1400,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1501,6 +1524,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1553,6 +1577,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1605,6 +1630,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1657,6 +1683,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1709,6 +1736,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1761,6 +1789,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1813,6 +1842,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1865,6 +1895,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1917,6 +1948,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -1973,6 +2005,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2029,6 +2062,7 @@ export default function NewObservationForm(props) {
               diskLength: value,
               width,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2085,6 +2119,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width: value,
               group,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2137,6 +2172,7 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group: value,
+              labels,
               Media,
             };
             const result = onChange(modelFields);
@@ -2185,6 +2221,81 @@ export default function NewObservationForm(props) {
               diskLength,
               width,
               group,
+              labels: values,
+              Media,
+            };
+            const result = onChange(modelFields);
+            values = result?.labels ?? values;
+          }
+          setLabels(values);
+          setCurrentLabelsValue("");
+        }}
+        currentFieldValue={currentLabelsValue}
+        label={"Labels"}
+        items={labels}
+        hasError={errors?.labels?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("labels", currentLabelsValue)
+        }
+        errorMessage={errors?.labels?.errorMessage}
+        setFieldValue={setCurrentLabelsValue}
+        inputFieldRef={labelsRef}
+        defaultFieldValue={""}
+      >
+        <TextField
+          label="Labels"
+          isRequired={false}
+          isReadOnly={false}
+          value={currentLabelsValue}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.labels?.hasError) {
+              runValidationTasks("labels", value);
+            }
+            setCurrentLabelsValue(value);
+          }}
+          onBlur={() => runValidationTasks("labels", currentLabelsValue)}
+          errorMessage={errors.labels?.errorMessage}
+          hasError={errors.labels?.hasError}
+          ref={labelsRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "labels")}
+        ></TextField>
+      </ArrayField>
+      <ArrayField
+        onChange={async (items) => {
+          let values = items;
+          if (onChange) {
+            const modelFields = {
+              date,
+              time,
+              timeName,
+              count,
+              stage,
+              sex,
+              condition,
+              depth,
+              distance,
+              temperature,
+              latitude,
+              longitude,
+              description,
+              comments,
+              substrate,
+              weight,
+              reportType,
+              site,
+              country,
+              specieCommonName,
+              specie,
+              reporter,
+              photographer,
+              mediaSource,
+              length,
+              diskLength,
+              width,
+              group,
+              labels,
               Media: values,
             };
             const result = onChange(modelFields);
