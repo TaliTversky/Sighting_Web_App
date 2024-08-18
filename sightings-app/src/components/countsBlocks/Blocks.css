@@ -1,0 +1,23 @@
+.count-boxes {
+    display: flex;
+    justify-content: space-between; /* This ensures there's space between the boxes */
+    padding: 20px;
+    gap: 20px; /* Add space between the boxes */
+  }
+  
+  .count-box {
+    width: 200px; /* Set a fixed width for each box */
+    height: 150px; /* Set a fixed height for each box */
+    padding: 20px;
+    background: linear-gradient(to bottom, #99ccff, #cceeff); /* Blue gradient inside the boxes */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    text-align: center;
+    color: #003366; /* Dark blue text color */
+    font-weight: bold;
+    font-size: 10px; /* Set a smaller font size */
+    display: flex;
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+  }
+  
