@@ -3,16 +3,15 @@ import "./SpeciesTags.css";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Chips } from 'primereact/chips';
-
-import { Tag } from 'primereact/tag';
-        
+import { Button } from 'primereact/button';
+import { Tag } from 'primereact/tag';   
 import { generateClient } from "aws-amplify/api";
 import { listObservations } from "../../graphql/queries";
 import { StorageImage } from "@aws-amplify/ui-react-storage";
 import { useEffect, useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Carousel } from 'primereact/carousel';
-
+import 'primeicons/primeicons.css';
 const client = generateClient();
 
 function Table() {
@@ -106,7 +105,11 @@ function Table() {
     return <span>No Image Available</span>;
   };
 
-  
+  const header = (
+    <div className="flex flex-wrap align-items-center justify-content-between gap-2">
+        <Button icon="pi pi-refresh" className="custom-button" rounded raised />
+    </div>
+  );
   
   const imageSlideshowDialog = () => {
     const imageTemplate = (item) => {
@@ -142,6 +145,7 @@ function Table() {
       {imageSlideshowDialog()}
       <DataTable
         value={sightings}
+        header={header}
         sortMode="multiple"
         resizableColumns
         columnResizeMode="expand"

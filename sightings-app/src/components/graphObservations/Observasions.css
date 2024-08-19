@@ -1,0 +1,7 @@
+.graph-container {
+    width: 100%; /* Adjust to make the container narrower */
+    height: 300px; /* Adjust to make the container shorter */
+    margin: 20px auto; /* This centers the container horizontally */
+    border-radius: 0px;
+    background-color: white;
+}

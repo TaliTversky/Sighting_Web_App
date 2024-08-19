@@ -104,3 +104,8 @@
   color: #666; /* lighter gray */
   text-align: right;
 }
+
+.custom-button {
+  background-color: #09223a; /* Green */
+  color: rgb(255, 255, 255);
+}
