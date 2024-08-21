@@ -1,55 +1,44 @@
 .home-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  .count-boxes {
-display: flex;
-justify-content: space-between; /* Space between the boxes */
-padding: 20px;
-gap: 30px; /* Space between the boxes */
-margin: 0 auto;
-width: 90%;
+  display: flex;
+  flex-wrap: nowrap;  
+  align-items: flex-start; 
+  justify-content: space-between;
+  padding: 20px;
+  gap: 40px;  
 }
 
-  .count-box {
-    width: 200px; /* Set a fixed width for each box */
-    height: 150px; /* Set a fixed height for each box */
-    padding: 20px;
-    background: linear-gradient(to bottom, #99ccff, #cceeff); /* Blue gradient inside the boxes */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    text-align: center;
-    color: #003366; /* Dark blue text color */
-    font-weight: bold;
-    font-size: 10px; /* Set a smaller font size */
-    display: flex;
-    justify-content: center; /* Center the text horizontally */
-    align-items: center; /* Center the text vertically */
-  }
-  
-  
-.main-graph {
-    /* width: 100%;  */
-    /* padding: 20px; */
-    background-color: #fff;
-    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
-    border-radius: 8px;
-  }
-
-.species-graph {
-width: 40%; /* Adjust based on the desired size of the graph */
-height: auto; /* Adjust or set a fixed height as needed */
-background-color: white;
-border-radius: 0px;
-/* padding: 20px; */
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.graph-container {
-    /* width: 100%; */
-    height: 300px; /* Adjust to make the container shorter */
-    margin: 20px auto; /* This centers the container horizontally */
-    border-radius: 0px;
-    background-color: white;
+.column-large {
+  flex: 2;  /* Makes the left column wider */
+}
+
+.column-small {
+  flex: 1;  /* Keeps the right column smaller */
+}
+
+.graph {
+  background: #fff;
+  padding: 20px; /* Increased padding for better containment */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  overflow: hidden; /* Prevents content from overflowing */
+}
+
+.graph h2 {
+  margin: 0 0 10px 0; /* Ensures no margin pushes content outside */
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* Specific styles for the Recharts graph to ensure it fits within the container */
+.recharts-wrapper {
+  max-width: 100%;
+  margin: auto; /* Centers the chart if smaller than the container */
 }

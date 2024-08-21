@@ -6,23 +6,7 @@ import "./TableHeaders.css";
 
 const client = generateClient();
 
-const TableHeaders = () => {
-  const [sightings, setSightings] = useState([]);
-  
-  useEffect(() => {
-    const fetchSightings = async () => {
-      try {
-        const sightingData = await client.graphql({
-          query: listObservations,
-        });
-        setSightings(sightingData.data.listObservations.items);
-      } catch (err) {
-        console.log("error fetching Sightings", err);
-      }
-    };
-
-    fetchSightings();
-  }, []);
+const TableHeaders = ({ sightings }) => {
   return (
     <div className="table-headers-container">
       <h2 className="all-observations-title">All observations</h2>

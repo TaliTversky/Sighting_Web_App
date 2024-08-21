@@ -1,23 +1,53 @@
 .count-boxes {
     display: flex;
-    justify-content: space-between; /* This ensures there's space between the boxes */
-    padding: 20px;
-    gap: 20px; /* Add space between the boxes */
-  }
-  
-  .count-box {
-    width: 200px; /* Set a fixed width for each box */
-    height: 150px; /* Set a fixed height for each box */
-    padding: 20px;
-    background: linear-gradient(to bottom, #99ccff, #cceeff); /* Blue gradient inside the boxes */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    text-align: center;
-    color: #003366; /* Dark blue text color */
-    font-weight: bold;
-    font-size: 10px; /* Set a smaller font size */
+    justify-content: space-between; /* Ensures there's space between the boxes */
+    gap: 20px; /* Adds space between the boxes */
+    margin: 20px; /* Margin around the whole container */
+}
+
+.count-box {
+    background-color: #f0f8ff; /* Light blue background */
+    border-radius: 12px; /* Rounded corners */
+    padding: 30px; /* Increased padding for larger boxes */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1); /* Deeper shadow for more depth */
     display: flex;
-    justify-content: center; /* Center the text horizontally */
-    align-items: center; /* Center the text vertically */
-  }
-  
+    flex-direction: column; /* Stacks the content vertically */
+    align-items: center; /* Centers items horizontally */
+    justify-content: center; /* Centers items vertically */
+    width: 250px; /* Fixed width for uniform size */
+    height: 150px; /* Fixed height for a bigger box */
+    margin-bottom: 240px;
+}
+
+.count-box h3 {
+  font-size: 22px; /* Increased font size for header */
+  color: #333;
+  margin: 5px 0;
+  font-weight: 600;
+}
+
+.count-box .count-value {
+    font-size: 36px; /* Larger font size for the count */
+    color: #666; /* Darker text color for the count */
+    font-weight: bold; /* Bold for the count */
+    margin: 10px 0; /* Space around the count */
+}
+
+.count-box .icon {
+    font-size: 40px; /* Larger icon size */
+    color: #4dbce8; /* Icon color matching the box color */
+    margin: 10px 0; /* Space around the icon */
+}
+
+/* Gradient backgrounds for different boxes */
+.count-box.observations {
+    background: linear-gradient(145deg, #ebf8c8, #87ddff); /* Soft green to blue gradient */
+}
+
+.count-box.species {
+    background: linear-gradient(145deg, #f0e8a5, #ffffff); /* Yellow gradient */
+}
+
+.count-box.countries {
+    background: linear-gradient(145deg, #ffffff, #4dbce8); /* Light blue to white gradient */
+}

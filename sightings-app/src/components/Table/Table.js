@@ -11,31 +11,119 @@ import { StorageImage } from "@aws-amplify/ui-react-storage";
 import { useEffect, useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Carousel } from 'primereact/carousel';
+import { ConfirmDialog } from 'primereact/confirmdialog'; // For <ConfirmDialog /> component
+import { confirmDialog } from 'primereact/confirmdialog'; // For confirmDialog method
+import * as mutations from '../../graphql/mutations';
+
+         
 import 'primeicons/primeicons.css';
 const client = generateClient();
 
-function Table() {
-  const [sightings, setSightings] = useState([]);
+function Table({ sightings, fetchSightings }) {
   const [expandedRows, setExpandedRows] = useState(null);
   const [displayDialog, setDisplayDialog] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
+  const [globalFilter, setGlobalFilter] = useState('');
 
   useEffect(() => {
     fetchSightings();
   }, []);
+
+  const handleRefresh = () => {
+    fetchSightings();
+  };
+  const getFilteredData = () => {
+    if (!globalFilter) return sightings;
   
-  async function fetchSightings() {
-    try {
-      const sightingData = await client.graphql({
-        query: listObservations,
-      });
-      const sightings = sightingData.data.listObservations.items;
-      setSightings(sightings);
-      console.log(sightings);
-    } catch (err) {
-      console.log("error fetching Sightings");
-    }
+    return sightings.filter(sighting => {
+      // Adjust fields as necessary
+      return Object.values(sighting).some(value =>
+        String(value).toLowerCase().includes(globalFilter.toLowerCase())
+      );
+    });
   }
+
+  const exportCSV = () => {
+    let csv = 'Name,Species,Count,Date,Site\n'; // Assuming these are your columns
+    sightings.forEach((row) => {
+      csv += `${row.name},${row.specieCommonName},${row.count},${row.date},${row.site}\n`; // Construct CSV string
+    });
+  
+    // Create a Blob for the CSV data
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+  
+    // Create a temporary link to trigger the download
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'sightings.csv'; // Name the file
+    link.click();
+  
+    // Clean up by revoking the URL and removing the link
+    URL.revokeObjectURL(url);
+    link.remove();
+  };
+  
+
+  const handleDeleteSighting = async (id) => {
+    try {
+      console.log('id >>> ', id)
+      const sighting = {
+        id: id
+      };
+
+      const deletedSighting = await client.graphql({
+        query: mutations.deleteObservation,
+        variables: { input: sighting }
+      });
+      console.log(`Deleting sighting with id: ${id}`);
+      // After deletion, filter out the deleted sighting from the state
+      const updatedSightings = sightings.filter(sighting => sighting.id !== id);
+      fetchSightings();
+    } catch (error) {
+      console.error('Failed to delete the sighting', error);
+    }
+  };
+
+  const confirmDelete = (id) => {
+    console.log("confirm")
+    confirmDialog({
+      message: 'Are you sure you want to delete this sighting?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => handleDeleteSighting(id),
+    });
+  };
+
+  const actionBodyTemplate = (rowData) => {
+    return (
+      <div className="action-buttons">
+            <Button 
+                icon="pi pi-pencil" 
+                rounded outlined 
+                className="p-button-rounded p-button-information p-button-icon-only"
+                onClick={() => handleEditSighting(rowData.id)} 
+                tooltip="Edit Sighting"
+            />
+            <Button 
+                icon="pi pi-trash" 
+                rounded outlined 
+                severity="danger"
+                onClick={() => confirmDelete(rowData.id)} 
+                tooltip="Delete Sighting"
+            />
+        </div>
+    );
+};
+
+// Function to handle the edit action
+const handleEditSighting = (id) => {
+    console.log(`Editing sighting with id: ${id}`);
+    // Here you would typically open a dialog or form to edit the sighting
+    // This could involve setting a state variable with the current sighting details
+    // and showing a modal or another component where the user can edit the details
+};
+
   const rowExpansionTemplate = (data) => {
     return (
     <div className="report-details">
@@ -46,7 +134,7 @@ function Table() {
         <span className="label-value-pair"><strong>Condition:</strong> {data.condition}</span>
         <span className="label-value-pair"><strong>Stage:</strong> {data.stage}</span>
         <span className="label-value-pair"><strong>Sex:</strong> {data.sex}</span>
-        <span className="label-value-pair"><strong>Links:</strong> {data.urlLinks}</span>
+        <span className="label-value-pair"><strong>Links:</strong> <a href={data.urlLinks} target="_blank" rel="noopener noreferrer">{data.urlLinks}</a></span>
       </div>
       
       <div className="report-row">
@@ -90,26 +178,59 @@ function Table() {
   };
 
   const mediaBodyTemplate = (rowData) => {
-    const handleImageClick = () => {
-      // Assuming rowData.Media is an array of image paths
+    const handleMediaClick = () => {
+      // Assuming rowData.Media is an array of media paths
       setCurrentImages(rowData.Media);
       setDisplayDialog(true);
     };
     
-    if (rowData.Media && rowData.Media.length > 0 && rowData.Media[0]) {
-      console.log("row data media >>>", rowData.Media[0]);
-      // Use the first media URL for the image, accessing the 'Image' property of the first item
-      return <StorageImage path={rowData.Media[0]} alt="Sighting Media" style={{ width: '80px', height: 'auto' }} onClick={handleImageClick} />;
+    if (rowData.Media && rowData.Media.length > 0) {
+      const firstMedia = rowData.Media[0];
+      // Check if the media is a video or image by file extension
+      const isVideo = firstMedia.endsWith('.mp4') || firstMedia.endsWith('.mov'); // Add more video formats as needed
+  
+      if (isVideo) {
+        return (
+          <video width="80" height="auto" controls onClick={handleMediaClick}>
+            <source src={firstMedia} type="video/mp4" /> {/* Adjust the MIME type according to the actual video format */}
+            Your browser does not support the video tag.
+          </video>
+        );
+      } else {
+        // Use StorageImage for Amplify-specific image handling or <img> if URLs are direct links
+        return <StorageImage path={firstMedia} alt="Sighting Media" style={{ width: '80px', height: 'auto' }} onClick={handleMediaClick} />;
+      }
     }
-    // Return a placeholder or nothing if no media is available
-    return <span>No Image Available</span>;
+    return <span>No Media Available</span>;
   };
+  
 
   const header = (
-    <div className="flex flex-wrap align-items-center justify-content-between gap-2">
-        <Button icon="pi pi-refresh" className="custom-button" rounded raised />
+    <div className="flex flex-wrap align-items-center justify-content-between" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="search-wrapper" style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          onChange={e => setGlobalFilter(e.target.value)} 
+          style={{ 
+            lineHeight: '1.5', 
+            padding: '4px 8px 4px 32px', 
+            borderRadius: '15px', 
+            border: '1px solid #ccc', 
+            background: `url('https://cdn-icons-png.flaticon.com/512/54/54481.png') no-repeat 8px center`, 
+            backgroundSize: '16px 16px', 
+            width: '250px' // Set a fixed width or adjust as needed
+          }} 
+        />
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Button icon="pi pi-refresh" className="custom-button" tooltip="Refresh" onClick={handleRefresh} />
+        <Button icon="pi pi-file-excel" className="p-button-success" tooltip="Export to CSV" onClick={exportCSV} style={{ marginLeft: '10px' }} />
+      </div>
     </div>
   );
+  
+  
   
   const imageSlideshowDialog = () => {
     const imageTemplate = (item) => {
@@ -127,10 +248,11 @@ function Table() {
 
     return (
         <Dialog 
-            header="Image Slideshow" 
+            header="Observation media" 
             visible={displayDialog} 
             style={{ width: '50vw' }} 
             onHide={() => setDisplayDialog(false)}
+            onClick={handleRefresh}
             modal
         >
             <Carousel value={currentImages} itemTemplate={imageTemplate} numVisible={1} numScroll={1} />
@@ -142,9 +264,10 @@ function Table() {
 
   return (
     <div className="table-area">
+      <ConfirmDialog />
       {imageSlideshowDialog()}
       <DataTable
-        value={sightings}
+        value={getFilteredData()}
         header={header}
         sortMode="multiple"
         resizableColumns
@@ -210,6 +333,7 @@ function Table() {
           body={labelsBodyTemplate}
           sortable
         />
+        <Column body={actionBodyTemplate} headerStyle={{ width: '8rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} />
       </DataTable>
     </div>
   );

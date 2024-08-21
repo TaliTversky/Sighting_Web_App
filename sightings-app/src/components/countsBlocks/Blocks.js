@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./Blocks.css";
 export const volunteersData = [
   { name: 'Alice', observations: 12 },
   { name: 'Bob', observations: 8 },
@@ -17,11 +17,11 @@ export const observationsData = [
 ];
 
 export const speciesData = [
-  { name: 'Shark', count: 10 },
-  { name: 'Dolphin', count: 8 },
-  { name: 'Whale', count: 5 },
-  { name: 'Turtle', count: 7 },
-  { name: 'Octopus', count: 3 },
+  { name: 'Coocko Ray', count: 10 },
+  { name: 'Dalatias Licha', count: 8 },
+  { name: 'Dasyatis Spp', count: 5 },
+  { name: 'Raja Clavata', count: 7 },
+  { name: 'Selachii', count: 3 },
 ];
 
 // Calculate totals
@@ -32,13 +32,13 @@ const totalVolunteers = volunteersData.length;
 const Blocks = () => {
   return (
     <div className='count-boxes'>
-      <div className="count-box">
+      <div className="count-box observations">
         <h3>Total Species: {totalSpecies}</h3>
       </div>
-      <div className="count-box">
+      <div className="count-box species">
         <h3>Total Observations: {totalObservations}</h3>
       </div>
-      <div className="count-box">
+      <div className="count-box countries">
         <h3>Total Volunteers: {totalVolunteers}</h3>
       </div>
     </div>

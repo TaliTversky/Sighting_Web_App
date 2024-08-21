@@ -10,7 +10,7 @@ export const speciesData = [
     { commonName: "Great Torpedo Ray", scientificName: "Tetronarce nobiliana" },
     { commonName: "Ocellate Torpedo", scientificName: "Torpedo torpedo" },
     { commonName: "Torpedo Ray", scientificName: "Torpedo spp." },
-    { commonName: "Common Eagle Ray", scientificName: "Myliobatis aquila" },
+    { commonName: "Common Eagle Ray1", scientificName: "Myliobatis aquila" },
     { commonName: "Common Eagle Ray", scientificName: "Aetomylaeus bovinus" },
     { commonName: "Stingray", scientificName: "Dasyatis spp." },
     { commonName: "Blue Stingray", scientificName: "Dasyatis marmorata" },

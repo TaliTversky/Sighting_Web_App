@@ -14,6 +14,8 @@ import { speciesData } from './speciesData';
 import { Chips } from 'primereact/chips';
 import { MultiSelect } from 'primereact/multiselect';
 import { FloatLabel } from "primereact/floatlabel";
+import { StorageManager } from "@aws-amplify/ui-react-storage";
+
 import 'primereact/resources/themes/saga-blue/theme.css'; // Theme
 import 'primereact/resources/primereact.min.css'; // Core CSS
 // import 'primeicons/primeicons.css'; // Icons
@@ -38,28 +40,30 @@ function ObservationForm() {
         reporter: "",
         photographer: "",
         mediaSource:  "",
-        stage: "NA",
-        sex: "NA",
-        condition: "NA",
-        length: 0,
-        diskLength: 0,
-        width: 0,
-        depth: 0,
-        distance: 0,
-        temperature: 0,
-        latitude: 0,
-        longitude: 0,
+        stage: null,
+        sex: null,
+        condition: null,
+        length: null,
+        diskLength: null,
+        width: null,
+        depth: null,
+        distance: null,
+        temperature: null,
+        latitude: null,
+        longitude: null,
         description: "",
         comments: "",
-        urlLinks: "",
-        substrate: "NA",
-        weight: 0
+        urlLinks: null,
+        substrate: null,
+        weight: null
     });
 
     const [selectedLifeStages, setSelectedLifeStages] = useState([]);
     const [selectedActivities, setSelectedActivities] = useState([]);
     const [selectedCharacters, setSelectedCharacters] = useState([]);
     const [selectedBehaviors, setSelectedBehaviors] = useState([]);
+    const [isExactTime, setIsExactTime] = useState(false);
+
 
     const lifeStageOptions = [
         { label: 'Juvenile', value: 'JUVENILE' },
@@ -79,17 +83,23 @@ function ObservationForm() {
                 if (!formData.date.trim()) errors.date = "Date is required.";
                 if (!formData.timeName.trim()) errors.timeName = "Time is required.";
                 if (!formData.site.trim()) errors.site = "Site is required.";
-    
-                // Convert number to string for validation if necessary
-                const latitude = formData.latitude.toString().trim();
-                const longitude = formData.longitude.toString().trim();
-    
-                if (!latitude || isNaN(Number(latitude)) || Number(latitude) < -90 || Number(latitude) > 90) {
-                    errors.latitude = "Valid latitude is required.";
+                if (formData.latitude != null){
+                            // Convert number to string for validation if necessary
+                            const latitude = formData.latitude.toString().trim();
+                
+                            if (!latitude || isNaN(Number(latitude)) || Number(latitude) < -90 || Number(latitude) > 90) {
+                                errors.latitude = "Valid latitude is required.";
+                            }
                 }
-                if (!longitude || isNaN(Number(longitude)) || Number(longitude) < -180 || Number(longitude) > 180) {
-                    errors.longitude = "Valid longitude is required.";
-                }
+
+                if (formData.longitude != null){
+                    // Convert number to string for validation if necessary
+                    const longitude = formData.longitude.toString().trim();
+        
+                    if (!longitude || isNaN(Number(longitude)) || Number(longitude) < -180 || Number(longitude) > 180) {
+                        errors.longitude = "Valid longitude is required.";
+                    }
+        }
     
                 if (!formData.specieCommonName.trim()) errors.specieCommonName = "Common name is required.";
                 if (!formData.specie.trim()) errors.specie = "Scientific name is required.";
@@ -145,9 +155,19 @@ function ObservationForm() {
     
 
     const handleFileChange = (event) => {
-        const uploadedFiles = Array.from(event.target.files);
+        const uploadedFiles = Array.from(event.target.files).filter(file => {
+            const validImageTypes = ['image/jpeg', 'image/png'];
+            const validVideoTypes = ['video/mp4', 'video/quicktime'];
+            if (validImageTypes.includes(file.type) || validVideoTypes.includes(file.type)) {
+                return true;
+            } else {
+                alert('Only JPEG, PNG, MP4, and MOV files are accepted.');
+                return false;
+            }
+        });
         setFiles(uploadedFiles);
     };
+    
 
     const validateInput = (name, value) => {
         let error = "";
@@ -195,12 +215,12 @@ function ObservationForm() {
         return error;
     }
 
-    const handleChange = (event) => {
+    const handleChange1 = (event) => {
         const { name, value } = event.target;
         let formattedValue = value;
     
         // Convert empty string to null for numerical fields if they are allowed to be null
-        if (value.trim() === "" && ['temperature', 'length', 'diskLength', 'width', 'depth', 'distance', 'weight'].includes(name)) {
+        if (value.trim() === "" && ['temperature', 'length', 'diskLength', 'width', 'depth', 'distance', 'weight','time'].includes(name)) {
             formattedValue = null;
         }
     
@@ -208,6 +228,46 @@ function ObservationForm() {
         setFormData(prev => ({ ...prev, [name]: formattedValue }));
         setFormErrors(prev => ({ ...prev, [name]: error }));
     };
+
+    const handleChange = (event) => {
+        const { name, value, type, checked } = event.target;
+    
+        if (name === "isExactTime") {
+            setIsExactTime(checked);
+            if (checked) {
+                // Set timeName to "EXACT" and disable the timeName field
+                setFormData(prev => ({
+                    ...prev,
+                    timeName: "EXACT",
+                    time: ""  // Optionally reset the time field
+                }));
+            } else {
+                // Allow user to select timeName when checkbox is not checked
+                setFormData(prev => ({
+                    ...prev,
+                    timeName: "",
+                    time: ""  // Optionally reset the time field
+                }));
+            }
+        } else if (name === "time" && !isExactTime) {
+            // If not exact time, prevent editing the time field
+            return;
+        } else if (name === "timeName" && isExactTime) {
+            // Prevent editing the timeName field if it is exact time
+            return;
+        } else {
+            let formattedValue = value;
+            // Handle conversion for numerical fields that allow null
+            if (value.trim() === "" && ['temperature', 'length', 'diskLength', 'width', 'depth', 'distance', 'weight','time'].includes(name)) {
+                formattedValue = null;
+            }
+    
+            const error = validateInput(name, formattedValue);
+            setFormData(prev => ({ ...prev, [name]: formattedValue }));
+            setFormErrors(prev => ({ ...prev, [name]: error }));
+        }
+    };
+    
     
     
     const validateAllFields = () => {
@@ -297,6 +357,7 @@ function ObservationForm() {
                 comments,
                 byUser,
                 substrate,
+                urlLinks,
                 weight 
             } = formData;
             const user = await getCurrentUser()
@@ -304,7 +365,7 @@ function ObservationForm() {
             const newsObservation = {
                 id: uuid(),
                 date,
-                time,
+                time: isExactTime ? time : null,
                 timeName,
                 reportType,
                 site,
@@ -327,9 +388,9 @@ function ObservationForm() {
                 longitude,
                 description,
                 comments,
-                byUser: user.signInDetails.loginId,
-                labels: allLabels,
+                byUser,
                 substrate,
+                urlLinks,
                 weight
             };
             // Create the API record:
@@ -343,20 +404,22 @@ function ObservationForm() {
 
 
             const imageKeys = await Promise.all(
-                Array.from(files).map(async (file) => {
+                Array.from(files).map(async (file, index) => {
                     // Upload each file:
+                    console.log("file type >>>", file.type)
+                    const contentType = file.type;
+                    const fileName = `${ObservationRecord.id}_${index + 1}.${file.type.startsWith('image') ? 'png' : 'mp4'}`;
                     const uploadResult = await uploadData({
-                        path: `public/${ObservationRecord.id}-${file.name}.png`,
+                        path: `public/${fileName}`,
                         data: file,
-                        options: { contentType: 'image/png' }
+                        options: { contentType: contentType }
                     });
-                    console.log(uploadResult.path)
     
                     // Create a Media record for each image:
                     const mediaId = uuid();
                     const mediaEntry = {
                         id: mediaId,
-                        Image: `public/${ObservationRecord.id}-${file.name}.png`,
+                        Image: `public/${fileName}`,
                         specie: ObservationRecord.specie,
                         Date: ObservationRecord.date,
                         time: ObservationRecord.time,
@@ -384,7 +447,7 @@ function ObservationForm() {
             const MediaUpdateObservation = {
                 id: ObservationRecord.id,
                 date,
-                time,
+                time: isExactTime ? time : null,
                 timeName,
                 reportType,
                 site,
@@ -407,9 +470,11 @@ function ObservationForm() {
                 longitude,
                 description,
                 comments,
-                byUser,
+                byUser: user.signInDetails.loginId,
                 substrate,
                 weight,
+                urlLinks,
+                labels: allLabels,
                 Media: imageKeys
             };
             console.log("form >>> ", MediaUpdateObservation)
@@ -470,27 +535,39 @@ function ObservationForm() {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
+                            <Form.Check
+                                type="checkbox"
+                                label="Exact Time"
+                                checked={isExactTime}
+                                onChange={handleChange}
+                                name="isExactTime"
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
                             <Form.Label>Time</Form.Label>
-                            <Form.Control 
-                                type="time" 
-                                name="time" 
-                                value={formData.time} 
-                                onChange={handleChange} 
-                                isInvalid={!!formErrors.time}
+                            <Form.Control
+                                type="time"
+                                name="time"
+                                value={formData.time}
+                                onChange={handleChange}
+                                disabled={!isExactTime}  // Disable if not exact time
+                                isInvalid={!isExactTime && formData.time}  // Mark invalid if time is filled but not exact
                             />
                             <Form.Control.Feedback type="invalid">
-                                {formErrors.time}
+                                Please clear the time or check "Exact Time."
                             </Form.Control.Feedback>
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label>Time of Day*</Form.Label>
-                            <Form.Control 
-                                as="select" 
-                                name="timeName" 
-                                value={formData.timeName} 
+                            <Form.Control
+                                as="select"
+                                name="timeName"
+                                value={formData.timeName}
                                 onChange={handleChange}
-                                isInvalid={!!formErrors.timeName}
+                                disabled={isExactTime}  // Disable if exact time
+                                isInvalid={!isExactTime && !formData.timeName}  // Mark invalid if not filled and not exact time
                             >
                                 <option value="">Select time of day</option>
                                 <option value="MORNING">Morning</option>
@@ -502,12 +579,12 @@ function ObservationForm() {
                                 <option value="LIGHT">Light</option>
                                 <option value="DARK">Dark</option>
                                 <option value="UNSPECIFIED">Unspecified</option>
-                                <option value="EXACT">Exact</option>
                             </Form.Control>
                             <Form.Control.Feedback type="invalid">
-                                {formErrors.timeName}
+                                Please select a time of day.
                             </Form.Control.Feedback>
                         </Form.Group>
+
 
                         <Form.Group className="mb-3">
                         <Form.Label>Site*</Form.Label>
@@ -767,6 +844,12 @@ function ObservationForm() {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
+                            <Form.Label>Links</Form.Label>
+                            <Form.Control type="text" placeholder="Enter Links" name="urlLinks" value={formData.urlLinks} onChange={handleChange} isInvalid={!!formErrors.urlLinks} />
+                            <Form.Control.Feedback type="invalid">{formErrors.urlLinks}</Form.Control.Feedback>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
                             <Form.Label>Description</Form.Label>
                             <Form.Control as="textarea" rows={3} placeholder="Enter description" name="description" value={formData.description} onChange={handleChange} isInvalid={!!formErrors.description} />
                             <Form.Control.Feedback type="invalid">{formErrors.description}</Form.Control.Feedback>
@@ -780,8 +863,7 @@ function ObservationForm() {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Media</Form.Label>
-                            <Form.Control type="file" multiple onChange={handleFileChange} name="media" />
-                            {/* Feedback for file inputs is typically handled differently, perhaps through alerts or messages elsewhere in the UI */}
+                            <Form.Control type="file" multiple onChange={handleFileChange} name="media" accept="image/*,video/*"/>
                         </Form.Group>
 
                     {currentStep > 1 && <Button label="Back" className="p-button-secondary" onClick={handleBack} />}
@@ -795,9 +877,23 @@ function ObservationForm() {
                     console.log("fileIndex >>> ",fileIndex);
                     const file = files[fileIndex];
                     const url = URL.createObjectURL(file);
+
+                    const mediaPreview = (file) => {
+                        if (file.type.startsWith('image')) {
+                            return <img src={url} alt={`Photo ${fileIndex + 1}`} style={{ width: '100%', maxHeight: '400px' }} />;
+                        } else if (file.type.startsWith('video')) {
+                            return (
+                                <video width="100%" controls>
+                                    <source src={url} type={file.type} />
+                                    Your browser does not support the video tag.
+                                </video>
+                            );
+                        }
+                    };
+
                     return (
                         <>
-                            <img src={url} alt={`Photo ${fileIndex + 1}`} style={{ width: '100%', maxHeight: '400px' }} />
+                            {mediaPreview(file)}
                             <div className="card p-fluid">
                                 <label htmlFor="lifeStage">Life Stage</label>
                                 <MultiSelect id="lifeStage" value={selectedLifeStages} options={lifeStageOptions} onChange={handleLifeStageChange} optionLabel="label" optionValue="value" placeholder="Select life stages" display="chip"/>

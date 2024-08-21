@@ -62,6 +62,17 @@
   font-size: medium !important;
 }
 
-.new-observation-button {
-  margin-left: auto;
+.new-observation-button button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 15px 10px; 
+  font-size: 13px; 
+  height: 20px; 
+  width: auto;  
+}
+
+.new-observation-button button span {
+  margin: auto;
 }

@@ -1,7 +1,19 @@
 .graph-container {
-    width: 100%; /* Adjust to make the container narrower */
-    height: 300px; /* Adjust to make the container shorter */
-    margin: 20px auto; /* This centers the container horizontally */
-    border-radius: 0px;
-    background-color: white;
-}
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content; /* Adjust width to fit content or set a specific width */
+  }
+  
+  .graph-title {
+    margin-bottom: 15px; /* Adjust space between title and graph */
+    text-align: center;
+    font-size: 18px; /* Adjust font size as needed */
+  }
+  

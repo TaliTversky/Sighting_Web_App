@@ -5,27 +5,24 @@ import Volunteers from '../components/graphVolunteers/Volunteers';
 import Blocks from '../components/countsBlocks/Blocks';
 
 import './Home.css';
-// import './Blocks.css';
 
 const Home = () => (
   <div className='home-container'>
-
-    <div className='count-boxs'>
-      <Blocks/>
+    <div className="column-large">
+      <div className="graph">
+        <Blocks />
+      
+        <Species />
+      </div>
     </div>
-
-    <div className='species-graph'>
-      <Species/>
+    <div className="column">
+      <div className="graph">
+        <Observations />
+      </div>
+      <div className="graph">
+        <Volunteers />
+      </div>
     </div>
-
-    <div className='main-graph'>
-      <Observations/>
-    </div>
-
-    <div className='Volunteers'>
-      <Volunteers/>
-    </div>
-
   </div>
 );
 

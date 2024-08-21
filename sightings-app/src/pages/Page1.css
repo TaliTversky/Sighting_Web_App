@@ -8,11 +8,33 @@
     width: 200px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   }
-  .card img {
+/* Adjust this to the correct CSS class used for images if necessary */
+  .card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 150px;
+    height: 100%;
     object-fit: cover;
+    visibility: hidden; /* Initially hide the image */
+    transition: visibility 0.5s ease-in-out;
   }
+
+  .img-visible {
+    visibility: visible; /* Make the image visible after it has loaded */
+  }
+
+  .spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
   .details {
     padding: 10px;
   }
@@ -23,3 +45,4 @@
     cursor: pointer;
   }
   
+  @import "~primeicons/primeicons.css";

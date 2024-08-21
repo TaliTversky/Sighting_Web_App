@@ -19,6 +19,7 @@
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid rgba(213, 218, 226, 1);
+  user-select: text;
 }
 
 /* Gridline visibility */
@@ -108,4 +109,61 @@
 .custom-button {
   background-color: #09223a; /* Green */
   color: rgb(255, 255, 255);
+}
+
+/* Custom CSS for ConfirmDialog */
+.p-confirm-dialog {
+  width: 60vw; /* Set to 60% of the viewport width */
+  max-width: none; /* Override any maximum width constraints */
+  padding: 20px; /* More internal space */
+  background-color: #fffefe; /* Dark background for contrast */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Stronger shadow for emphasis */
+}
+
+.p-confirm-dialog .p-confirm-dialog-message {
+  font-size: 16px; /* Larger text for better readability */
+  font-weight: bold; /* Make the text bold */
+}
+
+.p-confirm-dialog .p-button {
+  border-radius: 20px; /* Rounded buttons */
+  padding: 10px 20px; /* More padding for a better button feel */
+}
+
+.p-confirm-dialog .p-button-yes {
+  background-color: #007bff; /* Blue color for 'Yes' button */
+  border-color: #007bff;
+  color: white;
+}
+
+.p-confirm-dialog .p-button-no {
+  background-color: #f44336; /* Red color for 'No' button */
+  border-color: #f44336;
+  color: white;
+}
+
+.p-confirm-dialog .p-confirm-dialog-icon {
+  color: #ffa726; /* Change icon color */
+  font-size: 24px; /* Larger icon */
+}
+
+/* Styles for the action buttons */
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-button {
+  margin: 0 2px; /* Adjust spacing between buttons */
+  border-radius: 50%; /* Make buttons round */
+  width: 30px; /* Fixed width */
+  height: 30px; /* Fixed height */
+  padding: 0; /* Remove padding */
+}
+
+.custom-export-button {
+  background-color: #4dcf97; /* Green background */
+  color: rgb(255, 255, 255); /* White text color */
+  border: grey; /* No border */
 }
