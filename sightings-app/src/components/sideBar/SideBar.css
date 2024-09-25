@@ -24,8 +24,8 @@
 }
 
 .mecoIcon img {
-  width: 55px; /* Set the desired width */
-  height: 55px; /* Set the desired height */
+  width: 55px;
+  height: 55px; 
   object-fit: contain;
 }
 
@@ -38,7 +38,7 @@
 
 .iconBar img {
   margin: 10px 0; /* Add some spacing between the images */
-  width: 25px; /* Set the desired width */
-  height: 25px; /* Set the desired height */
+  width: 25px; 
+  height: 25px; 
   object-fit: contain;
 }

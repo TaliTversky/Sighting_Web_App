@@ -1,0 +1,123 @@
+/* src/components/Dashboard.css */
+
+/* Import Google Font for better typography */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* General Styles */
+
+.dashboard-container {
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f3f3f3; /* Dark Blue */
+  min-height: 100vh;
+  box-sizing: border-box;
+  color: #708996; /* White Text */
+  font-family: 'Roboto', sans-serif;
+  transform: scale(0.8); /* Adjust the scale value as needed */
+  transform-origin: top left;
+}
+
+/* Header */
+.header {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+/* Power Numbers */
+.power-numbers {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.power-card {
+  background-color: #2e3b4e; /* Slightly Lighter Blue */
+  padding: 20px;
+  border-radius: 8px;
+  width: 30%;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 80%;
+}
+
+.power-card h3 {
+  margin-bottom: 10px;
+  font-size: 2em;
+  color: #a0aec0; /* Gray */
+}
+
+.power-card p {
+  font-size: 5em;
+  color: #ffffff;
+}
+
+/* Chart/Table Sections */
+.chart-section, .table-section {
+  background-color: #2e3b4e; /* Slightly Lighter Blue */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+.chart-section h3, .table-section h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Recharts Custom Styles */
+.recharts-cartesiangrid-horizontal,
+.recharts-cartesiangrid-vertical {
+  stroke: #3b4a59; /* Minimal Grid Lines - Grayish Blue */
+}
+
+.recharts-tooltip-wrapper {
+  background-color: rgba(30, 42, 56, 0.9); /* Semi-transparent Dark Blue */
+  border: none;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.recharts-legend-wrapper {
+  color: #ffffff;
+}
+
+.recharts-text {
+  fill: #ffffff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .power-numbers {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .power-card {
+    background-color: #2e3b4e; /* Slightly Lighter Blue */
+    padding: 15px 20px; /* Reduced padding */
+    border-radius: 8px;
+    width: 30%; /* Reduced width from 30% to 20% */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease; /* Add hover effect */
+  }
+}

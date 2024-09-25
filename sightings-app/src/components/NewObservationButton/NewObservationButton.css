@@ -37,6 +37,7 @@ button.observation-button {
   margin: 6px;
   font-size: smaller;
   font-weight: 600;
+  min-height: 30px; 
 }
 
 button.observation-button:hover,
@@ -73,13 +74,14 @@ span.p-error {
   background-color: #1D2D45;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
   margin: 6px;
   font-size: smaller;
   font-weight: 600;
+  min-width: 60px; 
 }
 
 .p-button-primary:hover {
@@ -95,13 +97,14 @@ span.p-error {
   background-color: #f0f0f0;
   color: #333;
   border: 1px solid #ccc;
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
   margin: 6px;
   font-size: smaller;
   font-weight: 600;
+  min-width: 60px;
 }
 
 .p-button-secondary:hover {

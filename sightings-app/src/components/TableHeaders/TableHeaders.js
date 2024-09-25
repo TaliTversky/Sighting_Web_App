@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { generateClient } from "aws-amplify/api";
 import { listObservations } from "../../graphql/queries";
-import ObservationForm from "../NewObservationButton/form2";
+import ObservationForm from "../NewObservationButton/ObservationForm/ObservationForm";
 import "./TableHeaders.css";
 
 const client = generateClient();

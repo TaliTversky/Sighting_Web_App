@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import "./Table.css";
 import "./SpeciesTags.css";
 import { DataTable } from "primereact/datatable";
@@ -14,79 +15,85 @@ import { Carousel } from 'primereact/carousel';
 import { ConfirmDialog } from 'primereact/confirmdialog'; // For <ConfirmDialog /> component
 import { confirmDialog } from 'primereact/confirmdialog'; // For confirmDialog method
 import * as mutations from '../../graphql/mutations';
+import UpdateObservationForm from '../NewObservationButton/ObservationForm/UpdateObservationForm'; // Import the UpdateObservationForm
 
-         
 import 'primeicons/primeicons.css';
+
+// Generate an AWS Amplify client instance
 const client = generateClient();
 
+// Define the Table functional component
 function Table({ sightings, fetchSightings }) {
+  // State variables for managing component behavior
   const [expandedRows, setExpandedRows] = useState(null);
   const [displayDialog, setDisplayDialog] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
   const [globalFilter, setGlobalFilter] = useState('');
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
+  const [selectedObservationId, setSelectedObservationId] = useState(null);
 
+  // Fetch sightings data when the component mounts
   useEffect(() => {
     fetchSightings();
   }, []);
 
+  // Function to refresh the sightings data
   const handleRefresh = () => {
     fetchSightings();
   };
+
+  // Function to filter data based on the global filter
   const getFilteredData = () => {
     if (!globalFilter) return sightings;
-  
+
     return sightings.filter(sighting => {
       // Adjust fields as necessary
       return Object.values(sighting).some(value =>
         String(value).toLowerCase().includes(globalFilter.toLowerCase())
       );
     });
-  }
+  };
 
+  // Function to export sightings data to CSV
   const exportCSV = () => {
     let csv = 'Name,Species,Count,Date,Site\n'; // Assuming these are your columns
     sightings.forEach((row) => {
       csv += `${row.name},${row.specieCommonName},${row.count},${row.date},${row.site}\n`; // Construct CSV string
     });
-  
+
     // Create a Blob for the CSV data
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
-  
+
     // Create a temporary link to trigger the download
     const link = document.createElement('a');
     link.href = url;
     link.download = 'sightings.csv'; // Name the file
     link.click();
-  
+
     // Clean up by revoking the URL and removing the link
     URL.revokeObjectURL(url);
     link.remove();
   };
-  
 
+  // Function to handle the deletion of a sighting
   const handleDeleteSighting = async (id) => {
     try {
-      console.log('id >>> ', id)
-      const sighting = {
-        id: id
-      };
-
-      const deletedSighting = await client.graphql({
+      console.log('Deleting sighting with id:', id);
+      const sighting = { id };
+      await client.graphql({
         query: mutations.deleteObservation,
         variables: { input: sighting }
       });
-      console.log(`Deleting sighting with id: ${id}`);
-      // After deletion, filter out the deleted sighting from the state
-      const updatedSightings = sightings.filter(sighting => sighting.id !== id);
+      // After deletion, fetch the updated sightings
       fetchSightings();
     } catch (error) {
       console.error('Failed to delete the sighting', error);
     }
   };
 
+  // Function to confirm deletion with the user
   const confirmDelete = (id) => {
-    console.log("confirm")
     confirmDialog({
       message: 'Are you sure you want to delete this sighting?',
       header: 'Delete Confirmation',
@@ -95,100 +102,100 @@ function Table({ sightings, fetchSightings }) {
     });
   };
 
+  // Template for action buttons in each row
   const actionBodyTemplate = (rowData) => {
     return (
       <div className="action-buttons">
-            <Button 
-                icon="pi pi-pencil" 
-                rounded outlined 
-                className="p-button-rounded p-button-information p-button-icon-only"
-                onClick={() => handleEditSighting(rowData.id)} 
-                tooltip="Edit Sighting"
-            />
-            <Button 
-                icon="pi pi-trash" 
-                rounded outlined 
-                severity="danger"
-                onClick={() => confirmDelete(rowData.id)} 
-                tooltip="Delete Sighting"
-            />
-        </div>
+        <Button 
+          icon="pi pi-pencil" 
+          rounded 
+          outlined 
+          className="p-button-rounded p-button-information p-button-icon-only"
+          onClick={() => handleEditSighting(rowData.id)} 
+          tooltip="Edit Sighting"
+        />
+        <Button 
+          icon="pi pi-trash" 
+          rounded 
+          outlined 
+          severity="danger"
+          onClick={() => confirmDelete(rowData.id)} 
+          tooltip="Delete Sighting"
+        />
+      </div>
     );
-};
+  };
 
-// Function to handle the edit action
-const handleEditSighting = (id) => {
-    console.log(`Editing sighting with id: ${id}`);
-    // Here you would typically open a dialog or form to edit the sighting
-    // This could involve setting a state variable with the current sighting details
-    // and showing a modal or another component where the user can edit the details
-};
+  // Function to handle the edit action
+  const handleEditSighting = (id) => {
+    setSelectedObservationId(id);
+    setShowUpdateForm(true);
+  };
 
+  // Template for expanded row content
   const rowExpansionTemplate = (data) => {
     return (
-    <div className="report-details">
-      <div className="report-row">
-        <span className="label-value-pair"><strong>Reporter:</strong> {data.reporter}</span>
-        <span className="label-value-pair"><strong>Report Type:</strong> {data.reportType}</span>
-        <span className="label-value-pair"><strong>Group:</strong> {data.group}</span>
-        <span className="label-value-pair"><strong>Condition:</strong> {data.condition}</span>
-        <span className="label-value-pair"><strong>Stage:</strong> {data.stage}</span>
-        <span className="label-value-pair"><strong>Sex:</strong> {data.sex}</span>
-        <span className="label-value-pair"><strong>Links:</strong> <a href={data.urlLinks} target="_blank" rel="noopener noreferrer">{data.urlLinks}</a></span>
-      </div>
-      
-      <div className="report-row">
-        <span className="label-value-pair">
-          <strong>Size & Dimensions:</strong>
-          Width - {data.width} cm, Length - {data.length} cm, Disk length - {data.diskLength} cm, Weight - {data.weight} g
-        </span>
-        <span className="label-value-pair"><strong>Substrate:</strong> {data.substrate}</span>
-      </div>
-
-      <div className="report-row">
-        <span className="label-value-pair"><strong>SightingId:</strong> {data.id}</span>
-        <span className="label-value-pair"><strong>Created by:</strong> {data.byUser}</span>
-        <span className="label-value-pair"><strong>Created at:</strong> {data.createdAt}</span>
-        <span className="label-value-pair"><strong>Updated at:</strong> {data.updatedAt}</span>
-      </div>
-    </div>
-
-    
-  )
-
-  };
-
-  const nameBodyTemplate = (rowData) => {
-    return (
-      <div className={`tag ${rowData.species_tag}`}>
-        {rowData.speciesScienceName}
+      <div className="report-details">
+        <div className="report-row">
+          <span className="label-value-pair"><strong>Reporter:</strong> {data.reporter}</span>
+          <span className="label-value-pair"><strong>Report Type:</strong> {data.reportType}</span>
+          <span className="label-value-pair"><strong>Group:</strong> {data.group}</span>
+          <span className="label-value-pair"><strong>Condition:</strong> {data.condition}</span>
+          <span className="label-value-pair"><strong>Stage:</strong> {data.stage}</span>
+          <span className="label-value-pair"><strong>Sex:</strong> {data.sex}</span>
+          <span className="label-value-pair"><strong>Links:</strong> <a href={data.urlLinks} target="_blank" rel="noopener noreferrer">{data.urlLinks}</a></span>
+        </div>
+        <div className="report-row">
+          <span className="label-value-pair">
+            <strong>Size & Dimensions:</strong>
+            Width - {data.width} cm, Length - {data.length} cm, Disk length - {data.diskLength} cm, Weight - {data.weight} g
+          </span>
+          <span className="label-value-pair"><strong>Substrate:</strong> {data.substrate}</span>
+        </div>
+        <div className="report-row">
+          <span className="label-value-pair"><strong>SightingId:</strong> {data.id}</span>
+          <span className="label-value-pair"><strong>Created by:</strong> {data.byUser}</span>
+          <span className="label-value-pair"><strong>Created at:</strong> {data.createdAt}</span>
+          <span className="label-value-pair"><strong>Updated at:</strong> {data.updatedAt}</span>
+        </div>
       </div>
     );
   };
 
+  // Template for the species name column with custom styling
+  // const nameBodyTemplate = (rowData) => {
+  //   return (
+  //     <div className={`tag ${rowData.species_tag}`}>
+  //       {rowData.speciesScienceName}
+  //     </div>
+  //   );
+  // };
+
+  // Template for the labels column
   const labelsBodyTemplate = (rowData) => {
     const labels = rowData.labels || [];
     return (
-        <div className="labels-container">
-            {labels.map((label, index) => (
-                <Tag key={index} value={label} className="custom-tag" removable />
-            ))}
-        </div>
+      <div className="labels-container">
+        {labels.map((label, index) => (
+          <Tag key={index} value={label} className="custom-tag" removable />
+        ))}
+      </div>
     );
   };
 
+  // Template for the media column
   const mediaBodyTemplate = (rowData) => {
     const handleMediaClick = () => {
       // Assuming rowData.Media is an array of media paths
       setCurrentImages(rowData.Media);
       setDisplayDialog(true);
     };
-    
+
     if (rowData.Media && rowData.Media.length > 0) {
       const firstMedia = rowData.Media[0];
       // Check if the media is a video or image by file extension
       const isVideo = firstMedia.endsWith('.mp4') || firstMedia.endsWith('.mov'); // Add more video formats as needed
-  
+
       if (isVideo) {
         return (
           <video width="80" height="auto" controls onClick={handleMediaClick}>
@@ -203,8 +210,8 @@ const handleEditSighting = (id) => {
     }
     return <span>No Media Available</span>;
   };
-  
 
+  // Header component with search and action buttons
   const header = (
     <div className="flex flex-wrap align-items-center justify-content-between" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div className="search-wrapper" style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -229,43 +236,52 @@ const handleEditSighting = (id) => {
       </div>
     </div>
   );
-  
-  
-  
+
+  // Function to render the image slideshow dialog
   const imageSlideshowDialog = () => {
     const imageTemplate = (item) => {
-        return (       
-          <div style={{ margin: '10px 0' }}>   
-            <StorageImage path={item} alt="Sighting Media" style={{             
-              maxWidth: '60%', 
-              maxHeight: '60vh', // Limit the height to avoid overflow
-              display: 'block', 
-              marginLeft: 'auto', 
-              marginRight: 'auto'  }} />
-          </div>
-        );
+      return (
+        <div style={{ margin: '10px 0' }}>   
+          <StorageImage path={item} alt="Sighting Media" style={{             
+            maxWidth: '60%', 
+            maxHeight: '60vh', // Limit the height to avoid overflow
+            display: 'block', 
+            marginLeft: 'auto', 
+            marginRight: 'auto'  
+          }} />
+        </div>
+      );
     };
 
     return (
-        <Dialog 
-            header="Observation media" 
-            visible={displayDialog} 
-            style={{ width: '50vw' }} 
-            onHide={() => setDisplayDialog(false)}
-            onClick={handleRefresh}
-            modal
-        >
-            <Carousel value={currentImages} itemTemplate={imageTemplate} numVisible={1} numScroll={1} />
-        </Dialog>
+      <Dialog 
+        header="" 
+        visible={displayDialog} 
+        style={{ width: '50vw', background: '#d4d5d6' }} 
+        onHide={() => setDisplayDialog(false)}
+        onClick={handleRefresh}
+        modal
+      >
+        <Carousel value={currentImages} itemTemplate={imageTemplate} numVisible={1} numScroll={1} />
+      </Dialog>
     );
   };
 
-
-
+  // Render the component UI
   return (
     <div className="table-area">
       <ConfirmDialog />
       {imageSlideshowDialog()}
+      {/* Include the UpdateObservationForm modal */}
+      {showUpdateForm && (
+        <UpdateObservationForm 
+          observationId={selectedObservationId} 
+          onClose={() => {
+            setShowUpdateForm(false);
+            fetchSightings(); // Refresh the data after updating
+          }}
+        />
+      )}
       <DataTable
         value={getFilteredData()}
         header={header}
@@ -278,6 +294,7 @@ const handleEditSighting = (id) => {
         rowExpansionTemplate={rowExpansionTemplate}
         dataKey="id"
         paginator
+        scrollable scrollHeight="calc(100vh - 200px)"
         rows={10}
         totalRecords={50}
         tableStyle={{ minWidth: '150rem' }}
@@ -333,9 +350,15 @@ const handleEditSighting = (id) => {
           body={labelsBodyTemplate}
           sortable
         />
-        <Column body={actionBodyTemplate} headerStyle={{ width: '8rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} />
+        <Column 
+          body={actionBodyTemplate} 
+          headerStyle={{ width: '8rem', textAlign: 'center' }} 
+          bodyStyle={{ textAlign: 'center', overflow: 'visible' }} 
+        />
       </DataTable>
     </div>
   );
 }
+
+// Export the Table component
 export default Table;
